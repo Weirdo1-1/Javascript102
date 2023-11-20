@@ -427,6 +427,100 @@ let print = () => console.log("This arrow function has no parameters")
             */
 
 
-                
+                class Vehicle {
+                    constructor(name, manufacturer, id) {
+                      this.name = name;
+                      this.manufacturer = manufacturer;
+                      this.id = id;
+                    }
+                  }
+                  
+                  class Car extends Vehicle {
+                    constructor(name, manufacturer, id, type) {
+                      super(name, manufacturer, id);
+                      this.type = type;
+                    }
+                  }
+                  
+                  class Plane extends Vehicle {
+                    constructor(name, manufacturer, id, planeType) {
+                      super(name, manufacturer, id);
+                      this.planeType = planeType;
+                    }
+                  }
+                  
+                  class Employee {
+                    constructor(name, id, dateOfBirth) {
+                      this.name = name;
+                      this.id = id;
+                      this.dateOfBirth = dateOfBirth;
+                    }
+                  }
+                  
+                  class Driver extends Employee {
+                    constructor(name, id, dateOfBirth, licenseID) {
+                      super(name, id, dateOfBirth);
+                      this.licenseID = licenseID;
+                    }
+                  }
+                  
+                  class Pilot extends Employee {
+                    constructor(name, id, dateOfBirth, licenseID) {
+                      super(name, id, dateOfBirth);
+                      this.licenseID = licenseID;
+                    }
+                  }
+                  
+                  class Reservation {
+                    constructor(reservationDate, employeeId, vehicleId, reservationID) {
+                      this.reservationDate = reservationDate;
+                      this.employeeId = employeeId;
+                      this.vehicleId = vehicleId;
+                      this.reservationID = reservationID;
+                    }
+                  }
+                  
+                  const vehicles = [
+                    new Car("Car 1", "Manufacturer 1", 1, "Gas"),
+                    new Plane("Plane 1", "Manufacturer 4", 4, "Passenger"),
+                  ];
+                  
+                  const employees = [
+                    new Driver("Driver 1", 101, "01/15/1990", "D-001"),
+                    new Pilot("Pilot 1", 201, "05/20/1985", "P-001"),
+                  ];
+                  
+                  const reservations = [];
+                  
+                  function assignVehicleToEmployee(employeeId, vehicleId) {
+                    const employee = employees.find((emp) => emp.id === employeeId);
+                    const vehicle = vehicles.find((veh) => veh.id === vehicleId);
+                  
+                    if (!employee || !vehicle) {
+                      console.log("Employee or vehicle not found.");
+                      return;
+                    }
+                  
+                    if ((employee instanceof Pilot && vehicle instanceof Car) || (employee instanceof Driver && vehicle instanceof Plane)) {
+                      const reservation = new Reservation(
+                        new Date().toLocaleDateString(),
+                        employeeId,
+                        vehicleId,
+                        reservations.length + 1
+                      );
+                  
+                      reservations.push(reservation);
+                      console.log("Reservation created:", reservation);
+                    } else {
+                      console.log("Incompatible employee and vehicle types.");
+                    }
+                  }
+                  
+                  assignVehicleToEmployee(101, 1);
+                  assignVehicleToEmployee(201, 4);
+                  
+                  console.log("Reservations:");
+                  reservations.map((reservation) => console.log(reservation));
+                  
 
 
